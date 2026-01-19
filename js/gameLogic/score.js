@@ -3,7 +3,7 @@ let movimientos = checkMatches(matches);
 let juegoTerminado = false;
 
 
-import {checkMatches} from '../gameLogic/match.js'
+import {checkMatches} from '../gameLogic/match.js';
 const txtPuntaje = document.getElementById("puntaje");
 const txtMovimientos = document.getElementById("movimiento");
 
@@ -29,13 +29,16 @@ function descontarMovimiento() {
 }
 
 // 6. Lógica de Victoria o Derrota
+import {renderWin} from '../screens/end.js';
+import {renderLose} from '../screens/end.js';
+
 function finalizarJuego() {
     juegoTerminado = true;
 
     if (puntaje > 2000) {
-        window.location.href = "victoria.html";
+        window.location.href = renderWin;
     } else {
-        window.location.href = "derrota.html";
+        window.location.href = renderLose;
     }
 }
 
