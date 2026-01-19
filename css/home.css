@@ -4,7 +4,7 @@
 }
 body {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     background-color: #ff7eb3; /* color base */
     background-image: linear-gradient(135deg, #ff4f9a, #ff7eb3,#ffc3da);
     background-image: url(../img/Home/image\ copy.png);
@@ -23,16 +23,15 @@ body {
 }
 
 .git {
-    position: absolute;
-    right: 20%;
-    margin-top: 20%;
+    position: fixed;
     width: 380px;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.85);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     text-align: center;
-    backdrop-filter: blur(6px);
+    margin-left: 38.5%;
+    margin-top: 35%;
 }
 
 
@@ -82,6 +81,8 @@ body {
 
 .imgAfrodita {
     width: 40%;
-    height: 100%;
-    position: fixed;
+    height: 90%;
+    position:fixed;
+    margin-left: 30%;
+    margin-top: -120px;
 }
