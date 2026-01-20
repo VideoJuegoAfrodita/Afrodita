@@ -24,15 +24,17 @@
   grid-template-columns: repeat(8, 70px);
   grid-template-rows: repeat(8, 70px);
   gap: 8px;
-  background: #fff5f8;
+  background: #fff5f8a4;
   padding: 15px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .cell {
-  background: #fde2ec;
-  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  background: #ffe6f0;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,3 +50,9 @@
   width: 80%;
   pointer-events: none;
 }
+
+.cell.selected {
+  border: 3px solid rgb(223, 8, 115);
+  box-shadow: 0 0 10px pink;
+}
+
