@@ -1,47 +1,47 @@
 let puntaje = 0;
-let movimientos = checkMatches(matches);
+let movimientos = 20;
 let juegoTerminado = false;
 
-
-import {checkMatches} from '../gameLogic/match.js';
-const txtPuntaje = document.getElementById("puntaje");
-const txtMovimientos = document.getElementById("movimiento");
+import { renderWin, renderLose } from '../screens/end.js';
 
 // 4. Función para sumar puntos (se llamaría cuando el usuario hace un match)
-function sumarPuntos(cantidad) {
+export function sumarPuntos(cantidad) {
+    const txtPuntaje = document.querySelector('.score');
+
     if (juegoTerminado) return; 
 
-    puntaje += cantidad; 
-    txtPuntaje.textContent = puntaje; 
+    if (txtPuntaje) {
+        puntaje += cantidad; 
+        txtPuntaje.textContent = puntaje; 
+    }
 }
 
 // 5. Función para restar movimientos (se llama cada vez que el usuario mueve algo)
-function descontarMovimiento() {
+export function descontarMovimiento() {
     if (juegoTerminado) return;
 
-    movimientos--; 
-    txtMovimientos.textContent = movimientos;
+    const txtMovimientos = document.querySelector('.moves');
 
+    if (txtMovimientos) {
+        movimientos--; 
+        txtMovimientos.textContent = movimientos;
     
-    if (movimientos <= 0) {
-        finalizarJuego();
+    
+        if (movimientos <= 0) {
+            finalizarJuego();
+        }
     }
 }
 
 // 6. Lógica de Victoria o Derrota
-import {renderWin} from '../screens/end.js';
-import {renderLose} from '../screens/end.js';
 
-function finalizarJuego() {
+
+export function finalizarJuego() {
     juegoTerminado = true;
 
     if (puntaje > 2000) {
-        window.location.href = renderWin;
+        renderWin(puntaje);
     } else {
-        window.location.href = renderLose;
+        renderLose(puntaje);
     }
 }
-
-sumarPuntos()
-descontarMovimiento()
-finalizarJuego()
