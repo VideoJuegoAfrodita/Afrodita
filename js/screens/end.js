@@ -9,7 +9,7 @@ export function renderWin(score) {
 
       <div class="end-buttons">
         <button id="restart">Reintentar</button>
-        <button id="home">Inicio</button>
+        <button id="home" type ="submit">Inicio</button>
       </div>
     </section>
   `;
@@ -34,7 +34,7 @@ export function renderLose(score) {
 
       <div class="end-buttons">
         <button id="restart">Intentar otra vez</button>
-        <button id="home">Inicio</button>
+        <button id="home" type ="submit">Inicio</button>
       </div>
     </section>
   `;
@@ -46,4 +46,4 @@ export function renderLose(score) {
   document.getElementById("home").onclick = () => {
     window.dispatchEvent(new Event("go-home"));
   };
-}
+} 

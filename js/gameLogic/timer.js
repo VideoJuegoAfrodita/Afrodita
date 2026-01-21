@@ -1,4 +1,4 @@
-let tiempoRestante = 10;
+let tiempoRestante = 120;
 let juegoTerminado = false;
 
 import {finalizarJuego} from '../gameLogic/score.js';
