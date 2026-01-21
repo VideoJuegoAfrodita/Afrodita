@@ -27,6 +27,7 @@ export function removeMatches(board, matches) {
   });
 }
 
+  
 /**
  * Hace caer las fichas por gravedad
  */
