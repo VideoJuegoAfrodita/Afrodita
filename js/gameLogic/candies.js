@@ -8,20 +8,33 @@
 
 const CANDIES = ["heart", "rose", "shell", "ring", "dove"];
 
+import { sumarPuntos, descontarMovimiento } from './score.js';
 /**
  * Elimina las fichas marcadas (las deja en null)
  */
 export function removeMatches(board, matches) {
+// inicia el conteo de combinaciones 4
+  if (!matches || matches.length === 0) return;
+
+    // 2. Sumamos los puntos una sola vez recorriendo los grupos encontrados
+    matches.forEach(line => {
+        const puntosGanados = line.length + 20; 
+        sumarPuntos(puntosGanados);
+    });
+
   matches.forEach(([row, col]) => {
     board[row][col] = null;
   });
 }
+
   
 /**
  * Hace caer las fichas por gravedad
  */
 export function dropCandies(board) {
   const size = board.length;
+  // -------4--------//
+  descontarMovimiento();
 
   for (let col = 0; col < size; col++) {
     for (let row = size - 1; row >= 0; row--) {

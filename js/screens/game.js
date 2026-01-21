@@ -3,6 +3,8 @@
 import { createBoard, renderBoard } from "../gameLogic/board.js";
 import { checkMatches } from "../gameLogic/match.js";
 import { removeMatches, dropCandies, refillCandies } from "../gameLogic/candies.js";
+import {iniciarReloj} from '../gameLogic/timer.js';
+
 
 const btnStart = document.getElementById("start");
 
@@ -32,6 +34,7 @@ function startGame() {
   `;
 
   board = createBoard();
+  iniciarReloj();
 
   const boardContainer = document.getElementById("board");
 
