@@ -6,7 +6,7 @@ body {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     background-color: #ff7eb3; /* color base */
-    background-image: linear-gradient(135deg, #ff4f9a, #ff7eb3,#ffc3da);
+    background-image: linear-gradient(100deg, #ff4f9ba6, #ff7eb4c7,#bd869bf8);
     background-image: url(../img/Home/image\ copy.png);
     background-position: center;
     background-size: 20%;
@@ -56,7 +56,7 @@ body {
     font-weight: bold;
     border: none;
     border-radius: 30px;
-    background: linear-gradient(135deg, #ff7eb3, #ff4f9a);
+    background: linear-gradient(135deg, #b92965, #bb3770);
     color: white;
     cursor: pointer;
 
