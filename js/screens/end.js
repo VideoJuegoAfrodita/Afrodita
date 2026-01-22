@@ -5,8 +5,8 @@ export function renderEnd(score, isWin) {
     <section class="end-screen">
       <h2>${isWin ? "🎉 Victoria" : "💔 Derrota"}</h2>
       <p>Puntaje final: <strong>${score}</strong></p>
-      <button id="play-again">Reintentar</button>
-      <button id="go-home">Inicio</button>
+      <button  id="play-again">Reintentar</button>
+      <button  id="go-home">Inicio</button>
     </section>
   `;
 

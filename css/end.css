@@ -34,10 +34,12 @@
 
 .end-buttons {
   margin-top: 30px;
+  
 }
 
 .end-buttons button {
-  margin: 10px;
+   
+  margin: 50px;
   padding: 12px 30px;
   font-size: 1rem;
   border-radius: 25px;

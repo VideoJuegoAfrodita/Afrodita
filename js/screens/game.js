@@ -13,21 +13,7 @@ let moves = 20;
 let resolving = false;
 let ended = false;
 
-function renderStartScreen() {
-  const app = document.getElementById("app");
-
-  app.innerHTML = `
-    <section class="start-screen">
-      <h1>¡Bienvenido al juego!</h1>
-      <button id="start-btn">Iniciar</button>
-    </section>
-  `;
-
-  document.getElementById("start-btn").onclick = () => {
-    window.dispatchEvent(new Event("start-game"));
-  };
-}
-
+  
 
 function startGame() {
   const app = document.getElementById("app");
@@ -115,25 +101,9 @@ export function startNewGame() {
   resolving = false;
   resetScore();
   resetTimer();
-  startGame();
-  renderBoard() //
+  startGame();  
 }
 
 window.addEventListener("restart-game", startNewGame);
 
 
-// -------------------------
-// EVENTOS GLOBALES
-// -------------------------
-window.addEventListener("restart-game", startNewGame);
-
-// Listener para volver al inicio
-window.addEventListener("go-home", () => {
-  renderStartScreen();
-});
-
-// Listener para iniciar juego desde inicio
-window.addEventListener("start-game", startNewGame);
-
-// Render inicial
-renderStartScreen();
