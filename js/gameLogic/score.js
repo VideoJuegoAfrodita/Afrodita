@@ -1,47 +1,26 @@
-let puntaje = 0;
-let movimientos = 20;
-let juegoTerminado = false;
+import { renderEnd } from "../screens/end.js";
 
-import { renderWin, renderLose } from '../screens/end.js';
+let score = 0;
+let gameEnded = false;
 
-// 4. Función para sumar puntos (se llamaría cuando el usuario hace un match)
-export function sumarPuntos(cantidad) {
-    const txtPuntaje = document.querySelector('.score');
-
-    if (juegoTerminado) return; 
-
-    if (txtPuntaje) {
-        puntaje += cantidad; 
-        txtPuntaje.textContent = puntaje; 
-    }
+export function resetScore() {
+  score = 0;
+  gameEnded = false;
 }
 
-// 5. Función para restar movimientos (se llama cada vez que el usuario mueve algo)
-export function descontarMovimiento() {
-    if (juegoTerminado) return;
-
-    const txtMovimientos = document.querySelector('.moves');
-
-    if (txtMovimientos) {
-        movimientos--; 
-        txtMovimientos.textContent = movimientos;
-    
-    
-        if (movimientos <= 0) {
-            finalizarJuego();
-        }
-    }
+export function addScore(points) {
+  if (gameEnded) return;
+  score += points;
+  document.querySelector(".score").textContent = score;
 }
 
-// 6. Lógica de Victoria o Derrota
+export function finishGame(isWin) {
+  gameEnded = true;
 
+  const best = localStorage.getItem("bestScore") || 0;
+  if (score > best) {
+    localStorage.setItem("bestScore", score);
+  }
 
-export function finalizarJuego() {
-    juegoTerminado = true;
-
-    if (puntaje > 2000) {
-        renderWin(puntaje);
-    } else {
-        renderLose(puntaje);
-    }
+  renderEnd(score, isWin);
 }

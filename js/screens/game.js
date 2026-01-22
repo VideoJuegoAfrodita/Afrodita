@@ -1,19 +1,33 @@
-// game.js (Persona 2)
-
+// game.js - RUTAS CORREGIDAS
 import { createBoard, renderBoard } from "../gameLogic/board.js";
 import { checkMatches } from "../gameLogic/match.js";
 import { removeMatches, dropCandies, refillCandies } from "../gameLogic/candies.js";
-import {iniciarReloj} from '../gameLogic/timer.js';
+import { iniciarReloj, resetTimer, stopTimer } from "../gameLogic/timer.js";
+import { addScore, finishGame, resetScore } from "../gameLogic/score.js";
 
-
-const btnStart = document.getElementById("start");
+// ... resto del código SIN CAMBIOS ...
 
 let board = [];
 let selected = null;
+let moves = 20;
+let resolving = false;
+let ended = false;
 
-export function renderGame() {
-  btnStart.addEventListener("click", startGame);
+function renderStartScreen() {
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
+    <section class="start-screen">
+      <h1>¡Bienvenido al juego!</h1>
+      <button id="start-btn">Iniciar</button>
+    </section>
+  `;
+
+  document.getElementById("start-btn").onclick = () => {
+    window.dispatchEvent(new Event("start-game"));
+  };
 }
+
 
 function startGame() {
   const app = document.getElementById("app");
@@ -21,111 +35,105 @@ function startGame() {
   app.innerHTML = `
     <section class="game-screen">
       <header class="game-header">
-        <h2>Afrodita Crush 💖</h2>
-        <div class="game-info">
-          <span>Puntaje: <strong class="score">0</strong></span>
-          <span>Movimientos: <strong class="moves">20</strong></span>
-          <span>Tiempo: <strong class="time">120</strong></span>
-        </div>
+        <span>Puntaje: <strong class="score">0</strong></span>
+        <span>Movimientos: <strong class="moves">20</strong></span>
+        <span>Tiempo: <strong class="time">120</strong></span>
       </header>
-
       <div id="board" class="board"></div>
     </section>
   `;
+  
 
   board = createBoard();
   iniciarReloj();
-
-  const boardContainer = document.getElementById("board");
-
-  renderBoard(board, boardContainer, handleCellClick);
-
-  // 🔁 loop automático de cascadas
-  setInterval(gameLoop, 400);
+  render();
 }
 
-/* =============================
-   MANEJO DE CLICS (SWAP)
-============================= */
+function render() {
+  renderBoard(board, document.getElementById("board"), handleClick);
+}
 
-function handleCellClick(row, col) {
+function handleClick(row, col) {
+  if (ended || resolving) return;
+
   if (!selected) {
     selected = { row, col };
-    highlight(row, col);
     return;
   }
 
   const { row: r1, col: c1 } = selected;
-  const r2 = row;
-  const c2 = col;
+  selected = null;
 
-  clearHighlight();
+  if (Math.abs(r1 - row) + Math.abs(c1 - col) !== 1) return;
 
-  // 🔥 solo permitir adyacentes
-  if (!isAdjacent(r1, c1, r2, c2)) {
-    selected = null;
+  swap(r1, c1, row, col);
+
+  const matches = checkMatches(board);
+  if (matches.length === 0) {
+    swap(r1, c1, row, col);
     return;
   }
 
-  // 🔥 swap temporal
-  swap(board, r1, c1, r2, c2);
+  moves--;
+  document.querySelector(".moves").textContent = moves;
 
-  // 🔥 validar con Persona 3
+  resolving = true;
+  resolve();
+}
+
+function resolve() {
   const matches = checkMatches(board);
 
   if (matches.length === 0) {
-    // movimiento inválido → revertir
-    swap(board, r1, c1, r2, c2);
+    resolving = false;
+    if (moves <= 0) endGame();
+    return;
   }
 
-  selected = null;
+  addScore(matches.length * 20);
+  removeMatches(board, matches);
+  dropCandies(board);
+  refillCandies(board);
+  render();
 
-  const boardContainer = document.getElementById("board");
-  renderBoard(board, boardContainer, handleCellClick);
+  setTimeout(resolve, 300);
 }
 
-/* =============================
-   LOOP PRINCIPAL (Persona 3)
-============================= */
-
-function gameLoop() {
-  const matches = checkMatches(board);
-
-  if (matches.length > 0) {
-    removeMatches(board, matches);
-    dropCandies(board);
-    refillCandies(board);
-
-    const boardContainer = document.getElementById("board");
-    renderBoard(board, boardContainer, handleCellClick);
-  }
+function endGame() {
+  ended = true;
+  stopTimer();
+  finishGame(document.querySelector(".score").textContent >= 1000);
 }
 
-/* =============================
-   FUNCIONES AUXILIARES (Persona 2)
-============================= */
-
-function swap(board, r1, c1, r2, c2) {
-  const temp = board[r1][c1];
-  board[r1][c1] = board[r2][c2];
-  board[r2][c2] = temp;
+function swap(r1, c1, r2, c2) {
+  [board[r1][c1], board[r2][c2]] = [board[r2][c2], board[r1][c1]];
 }
 
-function isAdjacent(r1, c1, r2, c2) {
-  const dr = Math.abs(r1 - r2);
-  const dc = Math.abs(c1 - c2);
-  return dr + dc === 1;
+export function startNewGame() {
+  moves = 20;
+  ended = false;
+  resolving = false;
+  resetScore();
+  resetTimer();
+  startGame();
+  renderBoard() //
 }
 
-function highlight(row, col) {
-  const cell = document.querySelector(
-    `.cell[data-row="${row}"][data-col="${col}"]`
-  );
-  if (cell) cell.classList.add("selected");
-}
+window.addEventListener("restart-game", startNewGame);
 
-function clearHighlight() {
-  document.querySelectorAll(".cell.selected").forEach(cell => {
-    cell.classList.remove("selected");
-  });
-}
+
+// -------------------------
+// EVENTOS GLOBALES
+// -------------------------
+window.addEventListener("restart-game", startNewGame);
+
+// Listener para volver al inicio
+window.addEventListener("go-home", () => {
+  renderStartScreen();
+});
+
+// Listener para iniciar juego desde inicio
+window.addEventListener("start-game", startNewGame);
+
+// Render inicial
+renderStartScreen();

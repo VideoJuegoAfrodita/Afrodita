@@ -1,31 +1,33 @@
-let tiempoRestante = 120;
-let juegoTerminado = false;
+import { finishGame } from "./score.js";
 
-import {finalizarJuego} from '../gameLogic/score.js';
+let time = 120;
+let interval = null;
+let stopped = false;
 
-// 3. Función para iniciar el cronómetro
+export function resetTimer() {
+  time =5;
+  stopped = false;
+}
+
 export function iniciarReloj() {
+  const txtTime = document.querySelector(".time");
 
-    const txtTiempo = document.querySelector('.time');
-    // setInterval ejecuta el código cada 1000 milisegundos (1 segundo)
-    const intervalo = setInterval(() => {
-        // Si el juego ya terminó por movimientos, detenemos el reloj
-        if (juegoTerminado) {
-            clearInterval(intervalo);
-            return;
-        }
+  interval = setInterval(() => {
+    if (stopped) {
+      clearInterval(interval);
+      return;
+    }
 
-        tiempoRestante--;
-        if (txtTiempo) {
-            txtTiempo.textContent = tiempoRestante;
-        }
-        
+    time--;
+    txtTime.textContent = time;
 
-        if (tiempoRestante <= 0) {
-            clearInterval(intervalo);
-            finalizarJuego();
-        }
+    if (time <= 0) {
+      clearInterval(interval);
+      finishGame(false);
+    }
+  }, 1000);
+}
 
-        
-    }, 1000);
+export function stopTimer() {
+  stopped = true;
 }

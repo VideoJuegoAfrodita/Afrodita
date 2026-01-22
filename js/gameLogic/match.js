@@ -1,16 +1,10 @@
-/* =====================================================
-   match.js
-   Persona 3 – Detección de combinaciones (CORREGIDO)
-===================================================== */
-
 export function checkMatches(board) {
   const matches = [];
   const size = board.length;
 
-  // -------- HORIZONTALES --------
+  // Horizontales
   for (let row = 0; row < size; row++) {
     let col = 0;
-
     while (col < size - 2) {
       const color = board[row][col];
       if (!color) {
@@ -26,18 +20,14 @@ export function checkMatches(board) {
         nextCol++;
       }
 
-      if (line.length >= 3) {
-        matches.push(...line);
-      }
-
-      col = nextCol; // saltamos directo al final de la secuencia
+      if (line.length >= 3) matches.push(...line);
+      col = nextCol;
     }
   }
 
-  // -------- VERTICALES --------
+  // Verticales
   for (let col = 0; col < size; col++) {
     let row = 0;
-
     while (row < size - 2) {
       const color = board[row][col];
       if (!color) {
@@ -49,17 +39,14 @@ export function checkMatches(board) {
       let nextRow = row + 1;
 
       while (nextRow < size && board[nextRow][col] === color) {
-        line.push([nextRow, col]); // 🔥 AQUÍ ESTABA TU ERROR
+        line.push([nextRow, col]);
         nextRow++;
       }
 
-      if (line.length >= 3) {
-        matches.push(...line);
-      }
-
-      row = nextRow; // saltamos al final de la secuencia
+      if (line.length >= 3) matches.push(...line);
+      row = nextRow;
     }
   }
 
-  return matches; // posiciones únicas correctas
+  return matches;
 }
