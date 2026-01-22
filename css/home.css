@@ -1,88 +1,81 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+
 body {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    background-color: #ff7eb3; /* color base */
-    background-image: linear-gradient(100deg, #ff4f9ba6, #ff7eb4c7,#bd869bf8);
-    background-image: url(../img/Home/image\ copy.png);
-    background-position: center;
-    background-size: 20%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  background-color: #ff7eb3;
+  background-image: linear-gradient(135deg, #ff4f9a, #ff7eb3, #ffc3da);
+  background-image: url(../img/Home/image\ copy.png);
+  background-position: center;
+  background-size: 20%;
 }
-.start-game {
-    display: flex;
-}
+
 .afroditaImg {
-    width:400px ;
-    height: 500px;
-}
-.git {
-    margin-top: 40%;
+  width: 400px;
+  height: 500px;
 }
 
 .git {
-    position: fixed;
-    width: 380px;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    text-align: center;
-    margin-left: 38.5%;
-    margin-top: 35%;
+  position: fixed;
+  width: 380px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-left: 38.5%;
+  margin-top: 35%;
 }
-
 
 .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #b43a6f; 
-    margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #b43a6f;
+  margin-bottom: 1.5rem;
 }
-
 
 .start-game {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-
 .start-game button {
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #b92965, #bb3770);
-    color: white;
-    cursor: pointer;
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff7eb3, #ff4f9a);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .start-game button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 79, 154, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 79, 154, 0.5);
 }
 
 .start-game p {
-    font-size: 1rem;
-    color: #555;
+  font-size: 1rem;
+  color: #555;
 }
 
 #best-score {
-    font-weight: bold;
-    color: #b43a6f;
-    margin-top: -20px;
+  font-weight: bold;
+  color: #b43a6f;
+  margin-top: -20px;
 }
 
 .imgAfrodita {
-    width: 40%;
-    height: 90%;
-    position:fixed;
-    margin-left: 30%;
-    margin-top: -120px;
+  width: 40%;
+  height: 90%;
+  position: fixed;
+  margin-left: 30%;
+  margin-top: -120px;
 }

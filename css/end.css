@@ -6,7 +6,7 @@
   align-items: center;
   text-align: center;
   font-family: "Georgia", serif;
-  background: linear-gradient(100deg, #ff4f9ba6, #ff7eb4c7,#bd869bf8);
+  background: linear-gradient(135deg, #ffd6e8, #ff9fcf);
   color: #7a1c4b;
 }
 
@@ -105,14 +105,13 @@
 .broken-heart .left {
   left: 0;
   transform: rotate(-20deg);
-  animation: breakLeft 6s forwards;
-  
+  animation: breakLeft 1s forwards;
 }
 
 .broken-heart .right {
   right: 0;
   transform: rotate(20deg);
-  animation: breakRight 5s forwards;
+  animation: breakRight 1s forwards;
 }
 
 @keyframes breakLeft {
@@ -142,7 +141,7 @@
   font-weight: bold;
   border: none;
   border-radius: 30px;
-  background: linear-gradient(135deg, #b92965, #bb3770);;
+  background: linear-gradient(135deg, #ff7eb3, #ff4f9a);
   color: white;
   cursor: pointer;
 

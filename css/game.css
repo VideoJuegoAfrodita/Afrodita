@@ -1,18 +1,32 @@
 .game-screen {
+  position: relative;
   min-height: 100vh;
-  background:
-     linear-gradient(100deg, #ff4f9ba6, #ff7eb4c7,#bd869bf8),
-    url(../img/Home/image\ copy.png);
-  background-blend-mode: soft-light;
-  background-size: cover, 20%;
+  background: linear-gradient(135deg, #df73a2b2, #ff9fcf);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  opacity: 1;
-  
 }
 
+/* Capa de corazones transparente */
+.game-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(../img/Home/image\ copy.png);
+  background-size: 20%;
+  background-repeat: repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.game-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* HEADER */
 
 .game-header {
   text-align: center;
@@ -21,12 +35,14 @@
   font-size: 1.2rem;
 }
 
+/* TABLERO */
+
 .board {
   display: grid;
   grid-template-columns: repeat(8, 70px);
   grid-template-rows: repeat(8, 70px);
   gap: 8px;
-  background: rgba(255, 240, 248, 0.781);
+  background: rgba(255, 240, 248, 0.9);
   padding: 15px;
   border-radius: 25px;
   box-shadow: 0 15px 40px rgba(180, 60, 120, 0.25);
@@ -41,7 +57,6 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -60,21 +75,20 @@
   border: 3px solid #ff4fa3;
   box-shadow: 0 0 15px #ff7eb3;
 }
-/* MATCH x3 – brillo suave */
+
+/* ---------------- MATCH ANIMATIONS ---------------- */
+
+/* MATCH x3 */
 .match-3 {
   animation: glowSoft 0.6s ease-in-out infinite alternate;
 }
 
 @keyframes glowSoft {
-  from {
-    box-shadow: 0 0 5px #ff9fcf;
-  }
-  to {
-    box-shadow: 0 0 15px #ff4fa3;
-  }
+  from { box-shadow: 0 0 5px #ff9fcf; }
+  to   { box-shadow: 0 0 15px #ff4fa3; }
 }
 
-/* MATCH x4 – pulso más fuerte */
+/* MATCH x4 */
 .match-4 {
   animation: pulseStrong 0.5s ease-in-out infinite alternate;
 }
@@ -90,7 +104,7 @@
   }
 }
 
-/* MATCH x5 – explosión elegante */
+/* MATCH x5 */
 .match-5 {
   animation: megaShine 0.7s ease-in-out infinite alternate;
   background: radial-gradient(circle, #fff, #ffd1ec, #ff7eb3);
@@ -107,7 +121,8 @@
   }
 }
 
-/* Animación de desaparición suave */
+/* DESAPARICIÓN SUAVE */
+
 .fade-out {
   animation: fadeOut 0.4s ease forwards;
 }
