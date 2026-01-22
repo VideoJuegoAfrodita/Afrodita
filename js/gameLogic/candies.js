@@ -1,66 +1,38 @@
-/* =====================================================
-   candies.js
-   Persona 3 – Manejo de fichas
-===================================================== */
+const CANDIES = ["heart", "rose", "shell", "ring", "dove"];
 
-/**
- * Hace caer las fichas cuando hay espacios vacíos.
- * Recorre el tablero de abajo hacia arriba simulando gravedad.
- *
- * @param {Array} squares - arreglo de elementos del tablero
- * @param {number} width - ancho del tablero (8)
- */
-export function dropCandies(squares, width) {
-  for (let i = squares.length - 1; i >= 0; i--) {
-    if (squares[i].dataset.color === "") {
-      const above = i - width;
+export function removeMatches(board, matches) {
+  matches.forEach(([row, col]) => {
+    board[row][col] = null;
+  });
+}
 
-      if (above >= 0) {
-        squares[i].dataset.color = squares[above].dataset.color;
-        squares[i].className = "candy " + squares[i].dataset.color;
+export function dropCandies(board) {
+  const size = board.length;
 
-        squares[above].dataset.color = "";
-        squares[above].className = "candy empty";
+  for (let col = 0; col < size; col++) {
+    for (let row = size - 1; row >= 0; row--) {
+      if (board[row][col] === null) {
+        for (let k = row - 1; k >= 0; k--) {
+          if (board[k][col] !== null) {
+            board[row][col] = board[k][col];
+            board[k][col] = null;
+            break;
+          }
+        }
       }
     }
   }
 }
 
-/**
- * Genera nuevas fichas en los espacios vacíos.
- * Se ejecuta después de la caída.
- *
- * @param {Array} squares - “Esta función espera recibir un arreglo llamado squares”
- * @param {Array} colors - colores disponibles
- */
-export function refillCandies(squares, colors) {
-  squares.forEach(square => {
-    if (square.dataset.color === "") {
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      square.dataset.color = color;
-      square.className = "candy " + color;
+export function refillCandies(board) {
+  const size = board.length;
+
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      if (board[row][col] === null) {
+        board[row][col] =
+          CANDIES[Math.floor(Math.random() * CANDIES.length)];
+      }
     }
-  });
+  }
 }
-
-/* 
-ESTO SOLO SERA DE REFERENCIA PARA CONECTARLO EN EL MAIN QUE ES LA PERSONA DOS */
-
-/* 
-
-import { checkMatches, removeMatches } from "./logic/match.js";
-import { dropCandies, refillCandies } from "./logic/candies.js";
-
-const matches = checkMatches(squares, width);
-
-if (matches.length > 0) {
-  matches.forEach(match => {
-    // aquí decides animaciones, score, bombas, etc
-    removeMatches(squares, match);
-  });
-
-  dropCandies(squares, width);
-  refillCandies(squares, colors);
-}
-
-*/
