@@ -1,6 +1,6 @@
 import { finishGame } from "./score.js";
 
-let time = 120;
+let time = 5  ;
 let interval = null;
 let stopped = false;
 

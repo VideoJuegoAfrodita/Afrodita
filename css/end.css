@@ -153,3 +153,157 @@
   transform: scale(1.08);
   box-shadow: 0 10px 20px rgba(255, 79, 154, 0.5);
 }
+.end-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Georgia", serif;
+  background: linear-gradient(135deg, #ffd6e8, #ff9fcf);
+  color: #7a1c4b;
+}
+
+.end-screen h2 {
+  font-size: 2.5rem;
+  margin: 15px 0;
+}
+
+.end-screen p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+/* ---------------- HEART CONTAINER ---------------- */
+
+.heart-container {
+  position: relative;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+/* ---------------- VICTORIA – CORAZÓN LATIENDO ---------------- */
+
+.heart {
+  width: 80px;
+  height: 80px;
+  background: #ff4fa3;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: beat 1s infinite;
+  margin: auto;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  background: #ff4fa3;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -40px;
+  left: 0;
+}
+
+.heart::after {
+  left: 40px;
+  top: 0;
+}
+
+/* Latido */
+@keyframes beat {
+  0% { transform: scale(1) rotate(-45deg); }
+  25% { transform: scale(1.1) rotate(-45deg); }
+  50% { transform: scale(1) rotate(-45deg); }
+  75% { transform: scale(1.15) rotate(-45deg); }
+  100% { transform: scale(1) rotate(-45deg); }
+}
+
+/* Corazoncitos flotando */
+.mini-hearts span {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: float 2s infinite ease-in-out;
+}
+
+.mini-hearts span:nth-child(1) { left: -40px; animation-delay: 0s; }
+.mini-hearts span:nth-child(2) { right: -40px; animation-delay: 0.5s; }
+.mini-hearts span:nth-child(3) { top: -40px; animation-delay: 1s; }
+
+@keyframes float {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(-30px); }
+}
+
+/* ---------------- DERROTA – CORAZÓN ROTO ---------------- */
+
+.broken-heart {
+  position: relative;
+  width: 100px;
+  height: 80px;
+}
+
+.broken-heart .half {
+  width: 50px;
+  height: 80px;
+  background: #b30059;
+  position: absolute;
+  top: 0;
+  border-radius: 50px 50px 0 0;
+}
+
+.broken-heart .left {
+  left: 0;
+  transform: rotate(-20deg);
+  animation: breakLeft 1s forwards;
+}
+
+.broken-heart .right {
+  right: 0;
+  transform: rotate(20deg);
+  animation: breakRight 1s forwards;
+}
+
+@keyframes breakLeft {
+  to {
+    transform: translateX(-40px) rotate(-40deg);
+    opacity: 0;
+  }
+}
+
+@keyframes breakRight {
+  to {
+    transform: translateX(40px) rotate(40deg);
+    opacity: 0;
+  }
+}
+
+/* ---------------- BOTONES ESTILO AFRODITA ---------------- */
+
+.end-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.end-buttons button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff7eb3, #ff4f9a);
+  color: white;
+  cursor: pointer;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.end-buttons button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(255, 79, 154, 0.5);
+}
