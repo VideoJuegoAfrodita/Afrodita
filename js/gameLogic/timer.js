@@ -1,11 +1,11 @@
 import { finishGame } from "./score.js";
 
-let time = 5  ;
+let time = 120  ;
 let interval = null;
 let stopped = false;
 
 export function resetTimer() {
-  time =5;
+  time =120;
   stopped = false;
 }
 
